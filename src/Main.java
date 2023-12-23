@@ -5,8 +5,11 @@ public class Main {
         System.out.println("121. problem: " + maxProfit(prices));
 
         for (int i = 0; i < productExceptSelf(prices).length; i++) {
-            System.out.println("57. problem: " + productExceptSelf(prices)[i]);
+            System.out.println("238. problem: " + productExceptSelf(prices)[i]);
         }
+
+        int[] nums = new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4};
+        System.out.println("57. problem: " + maxSubArray(nums));
 
 
     }
@@ -32,8 +35,7 @@ public class Main {
 
     }
 
-
-    // 53. Maximum Subarray
+    // 238. Product of Array Except Self
     public static int[] productExceptSelf(int[] nums) {
         int[] prefix = new int[nums.length];
         int[] postfix = new int[nums.length];
@@ -73,5 +75,23 @@ public class Main {
         }
 
         return prefix;
+    }
+
+
+    // 53. Maximum Subarray
+    public static int maxSubArray(int[] nums) {
+
+        int maxSub = nums[0];
+        int currentSum = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+            if (currentSum < 0) {
+                currentSum = 0;
+            }
+            currentSum = currentSum + nums[i];
+            maxSub = Math.max(currentSum, maxSub);
+        }
+
+        return maxSub;
     }
 }
