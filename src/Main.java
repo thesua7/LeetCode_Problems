@@ -3,16 +3,18 @@ public class Main {
 
         int[] prices = new int[]{1, 2, 3, 4};
         System.out.println("121. problem: " + maxProfit(prices));
-
         for (int i = 0; i < productExceptSelf(prices).length; i++) {
             System.out.println("238. problem: " + productExceptSelf(prices)[i]);
         }
-
         int[] nums = new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4};
         System.out.println("57. problem: " + maxSubArray(nums));
 
         int[] nums1 = new int[]{2, 3, -2, 4};
-        System.out.println("57. problem: " + maxProduct(nums1));
+        System.out.println("152. problem: " + maxProduct(nums1));
+
+        int[] nums2 = new int[]{3, 4, 5, 1, 2};
+        System.out.println("153. problem: " + finMin(nums2));
+
     }
 
     // Blind - 75
@@ -121,5 +123,28 @@ public class Main {
         return max;
 
 
+    }
+
+
+    // 153. Find Minimum in Rotated Sorted Array
+    public static int finMin(int[] nums) {
+        int result = nums[0];
+        int left = 0;
+        int right = nums.length - 1;
+        while (left <= right) {
+            if (nums[left] < nums[right]) {
+                result = Math.min(result, nums[left]);
+                break;
+            }
+            int middle = (left + right) / 2;
+            result = Math.min(nums[middle], result);
+            if (nums[middle] >= nums[left]) {
+                left = middle + 1;
+
+            } else {
+                right = middle - 1;
+            }
+        }
+        return result;
     }
 }
