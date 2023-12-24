@@ -3,6 +3,8 @@ public class Main {
 
         int[] prices = new int[]{1, 2, 3, 4};
         System.out.println("121. problem: " + maxProfit(prices));
+
+
         for (int i = 0; i < productExceptSelf(prices).length; i++) {
             System.out.println("238. problem: " + productExceptSelf(prices)[i]);
         }
@@ -18,6 +20,18 @@ public class Main {
 
         int[] nums3 = new int[]{4, 5, 6, 7, 0, 1, 2};
         System.out.println("33. problem: " + search(nums3, 0));
+
+
+        int[] nums4 = new int[]{2,7,11,15};
+        int[] result167 = twoSum(nums4, 9);
+
+        for (int i=0;i<result167.length;i++){
+            System.out.println("167. problem: "+result167[i]);
+        }
+
+
+
+
 
     }
 
@@ -179,5 +193,26 @@ public class Main {
             }
         }
         return -1;
+    }
+
+
+    // 167. Two Sum II - Input Array Is Sorted
+    public static int[] twoSum(int[] numbers, int target) {
+        int left=0;
+        int right= numbers.length-1;
+        int currentSum = 0;
+        while (left<right){
+            currentSum = numbers[left]+numbers[right];
+            if (currentSum>target){
+                right = right-1;
+            }
+            else if (currentSum<target){
+                left = left +1;
+            }
+            else {
+                return new int[]{left+1,right+1};
+            }
+        }
+        return new int[]{};
     }
 }
