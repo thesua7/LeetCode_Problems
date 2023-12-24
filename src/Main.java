@@ -11,7 +11,8 @@ public class Main {
         int[] nums = new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4};
         System.out.println("57. problem: " + maxSubArray(nums));
 
-
+        int[] nums1 = new int[]{2, 3, -2, 4};
+        System.out.println("57. problem: " + maxProduct(nums1));
     }
 
     // Blind - 75
@@ -93,5 +94,32 @@ public class Main {
         }
 
         return maxSub;
+    }
+
+    // 152. Maximum Product
+
+    public static int maxProduct(int[] nums) {
+        int prefix = 1;
+        int suffix = 1;
+
+        int max = Integer.MIN_VALUE;
+
+
+        for (int i = 0; i < nums.length; i++) {
+            if (prefix == 0) {
+                prefix = 1;
+            }
+            if (suffix == 0) {
+                suffix = 1;
+            }
+            prefix = prefix * nums[i];
+            suffix = suffix * nums[nums.length - i - 1];
+            max = Math.max(max, Math.max(prefix, suffix));
+
+        }
+
+        return max;
+
+
     }
 }
