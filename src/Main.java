@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -22,15 +26,17 @@ public class Main {
         System.out.println("33. problem: " + search(nums3, 0));
 
 
-        int[] nums4 = new int[]{2,7,11,15};
+        int[] nums4 = new int[]{2, 7, 11, 15};
         int[] result167 = twoSum(nums4, 9);
 
-        for (int i=0;i<result167.length;i++){
-            System.out.println("167. problem: "+result167[i]);
+        for (int i = 0; i < result167.length; i++) {
+            System.out.println("167. problem: " + result167[i]);
         }
 
+        int[] nums5 = new int[]{-1, 0, 1, 2, -1, -4};
 
 
+        System.out.println("15. problem " + threeSum(nums5).toArray());
 
 
     }
@@ -60,7 +66,7 @@ public class Main {
     public static int[] productExceptSelf(int[] nums) {
         int[] prefix = new int[nums.length];
         int[] postfix = new int[nums.length];
-        int[] result = new int[nums.length];
+
 
         int product = 1;
 
@@ -167,7 +173,6 @@ public class Main {
     }
 
 
-
     // 33. Search in Rotated Sorted Array
     public static int search(int[] nums, int target) {
         int left = 0;
@@ -198,21 +203,55 @@ public class Main {
 
     // 167. Two Sum II - Input Array Is Sorted
     public static int[] twoSum(int[] numbers, int target) {
-        int left=0;
-        int right= numbers.length-1;
+        int left = 0;
+        int right = numbers.length - 1;
         int currentSum = 0;
-        while (left<right){
-            currentSum = numbers[left]+numbers[right];
-            if (currentSum>target){
-                right = right-1;
-            }
-            else if (currentSum<target){
-                left = left +1;
-            }
-            else {
-                return new int[]{left+1,right+1};
+        while (left < right) {
+            currentSum = numbers[left] + numbers[right];
+            if (currentSum > target) {
+                right = right - 1;
+            } else if (currentSum < target) {
+                left = left + 1;
+            } else {
+                return new int[]{left + 1, right + 1};
             }
         }
         return new int[]{};
+    }
+
+    //15. 3Sum
+    public static List<List<Integer>> threeSum(int[] nums) {
+
+        List<List<Integer>> result = new ArrayList<>();
+
+
+        Arrays.sort(nums);
+
+        for (int i = 0; i < nums.length; i++) {
+            if (i > 0 && nums[i - 1] == nums[i]) {
+                continue;
+            }
+            int left = i + 1;
+            int right = nums.length - 1;
+            while (left < right) {
+                int threeSum = nums[i] + nums[left] + nums[right];
+                if (threeSum < 0) {
+                    left++;
+                } else if (threeSum > 0) {
+                    right--;
+
+                } else {
+                    List<Integer> temp = new ArrayList<>(Arrays.asList(nums[i], nums[left], nums[right]));
+                    result.add(temp);
+                    left++;
+                    while (nums[left] == nums[left - 1] && left < right) {
+                        left++;
+                    }
+                }
+            }
+        }
+
+        return result;
+
     }
 }
